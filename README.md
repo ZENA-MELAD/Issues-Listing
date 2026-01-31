@@ -31,7 +31,7 @@ A React-based frontend application to browse issues from the [React repository](
 - **TailwindCSS** for styling
 - **React Router DOM** for routing
 - **React Icons** for UI icons
-- **Fetch / Axios** for GitHub API requests
+- **Axios** for GitHub API requests
 
 ## Installation
 

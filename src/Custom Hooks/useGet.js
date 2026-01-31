@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import config from "../Constants/enviroment";
 
-const useGet = (endPoint) => {
+const useGet = (endPoint, query = {}) => {
   const [data, setData] = useState();
   const [page, setPage] = useState(1);
   const [hasNext, setHasNext] = useState(false);
@@ -18,28 +18,27 @@ const useGet = (endPoint) => {
 
       try {
         const res = await axios.get(`${config.baseUrl}/${endPoint}`, {
-          params: { per_page: 10, page }, // تمرير الصفحة وعدد العناصر
+          params: { per_page: 10, page, ...query },
         });
-
         if (!isMounted) return;
-        setData(res.data);
-
-        // التحقق من وجود صفحات سابقة أو تالية
+        const dataResult = res.data.items ? res.data.items : res.data;
+        setData(dataResult);
+        console.log(res);
+        // prev or next pages
         const link = res.headers.link || "";
         setHasNext(link.includes('rel="next"'));
         setHasPrev(link.includes('rel="prev"'));
-
       } catch (err) {
         console.log(err);
       } finally {
         if (isMounted) setLoading(false);
       }
     };
-
     fetchData();
-
-    return () => { isMounted = false }; // حماية من تحديث state بعد unmount
-  }, [page, endPoint]);
+    return () => {
+      isMounted = false;
+    }; // حماية من تحديث state بعد unmount
+  }, [page, endPoint, JSON.stringify(query)]);
 
   return [data, page, setPage, hasNext, hasPrev, loading];
 };
