@@ -1,7 +1,13 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 const Issues = ({ issues, page, setPage, hasNext, hasPrev, isSearchMode }) => {
+  const navigate=useNavigate()
+  const handleNavigate=(id)=>{
+console.log(id)
+navigate(`/detail/${id}`)
+  }
   return (
     <div className="w-full flex flex-col items-center gap-y-3">
       {/* desktop design */}
@@ -22,6 +28,7 @@ const Issues = ({ issues, page, setPage, hasNext, hasPrev, isSearchMode }) => {
                 <tr
                   key={issue.id}
                   className="hover:bg-gray-100 border-b border-gray-200 cursor-pointer"
+                  onClick={()=>handleNavigate(issue.number)}
                 >
                   <td className="w-1/3  p-2">{issue.title}</td>
                   {isSearchMode && <td className="max-w-md line-clamp-2">{issue.body}</td>}
@@ -45,8 +52,9 @@ const Issues = ({ issues, page, setPage, hasNext, hasPrev, isSearchMode }) => {
           issues.map((issue) => (
             <div
               key={issue.id}
-              className=" w-full border border-gray-300 rounded-lg p-3 shadow-sm"
-            >
+              className=" w-full border border-gray-300 rounded-lg p-3 shadow-sm cursor-pointer"
+              onClick={()=>handleNavigate(issue.number)}
+             >
               <h3 className="font-semibold mb-2">{issue.title}</h3>
               {isSearchMode && (
                 <div className="text-sm flex justify-between">

@@ -32,6 +32,8 @@ A React-based frontend application to browse issues from the [React repository](
 - **React Router DOM** for routing
 - **React Icons** for UI icons
 - **Axios** for GitHub API requests
+-**React-MarkDown** Implement safe and accurate rendering of a GitHub Issue body field in a React application
+
 
 ## Installation
 

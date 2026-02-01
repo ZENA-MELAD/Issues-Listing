@@ -24,14 +24,13 @@ const useGet = (endPoint, query = {}) => {
         const dataResult = res.data.items ? res.data.items : res.data;
         setData(dataResult);
         console.log(res);
+        setLoading(false);
         // prev or next pages
         const link = res.headers.link || "";
         setHasNext(link.includes('rel="next"'));
         setHasPrev(link.includes('rel="prev"'));
       } catch (err) {
         console.log(err);
-      } finally {
-        if (isMounted) setLoading(false);
       }
     };
     fetchData();
