@@ -13,7 +13,7 @@ const Body = ({ text }) => {
         <></>
       ) : (
         <button
-          onClick={() => setExpanded(!expanded)}
+          onClick={() => setExpanded(prev=>!prev)}
           className="text-blue-600 ml-2 underline capitalize cursor-pointer"
         >
           {expanded ? "show less" : "show more"}

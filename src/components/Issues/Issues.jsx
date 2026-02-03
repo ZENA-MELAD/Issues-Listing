@@ -11,7 +11,7 @@ navigate(`/detail/${id}`)
   return (
     <div className="w-full flex flex-col items-center gap-y-3">
       {/* desktop design */}
-      <div className="hidden lg:block overflow-hidden w-11/12  rounded-lg border border-gray-200">
+      <div className="hidden  overflow-hidden lg:block lg:w-full  rounded-lg border border-gray-200 xl:w-11/12">
         <table className=" border-collapse w-full">
           <thead className="bg-gray-100">
             <tr className="capitalize text-left">
@@ -31,14 +31,14 @@ navigate(`/detail/${id}`)
                   onClick={()=>handleNavigate(issue.number)}
                 >
                   <td className="w-1/3  p-2">{issue.title}</td>
-                  {isSearchMode && <td className="max-w-md line-clamp-2">{issue.body}</td>}
+                  {isSearchMode && <td className="max-w-md line-clamp-3 pt-2">{issue.body}</td>}
                   <td
-                    className={`${issue.state === "open" ? "text-green-400" : "text-red-400"}`}
+                    className={`${issue.state === "open" ? "text-green-400" : "text-red-400"}  p-2`}
                   >
                     {issue.state}
                   </td>
-                  <td className="w-1/5 lg:w-fit">{issue.user.login}</td>
-                  <td className="">
+                  <td className=" p-2">{issue.user.login}</td>
+                  <td className=" p-2">
                     {new Date(issue.created_at).toLocaleDateString("en-GB")}
                   </td>
                 </tr>
